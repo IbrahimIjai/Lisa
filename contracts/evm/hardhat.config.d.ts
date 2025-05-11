@@ -1,8 +1,5 @@
 import type { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox-viem";
-
-const config: HardhatUserConfig = {
-  solidity: "0.8.28",
-};
-
+declare const config: HardhatUserConfig;
 export default config;
+//# sourceMappingURL=hardhat.config.d.ts.map

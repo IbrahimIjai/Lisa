@@ -1,0 +1,18 @@
+{
+  "name": "@zeroprotocol/helpers",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "tsc --pretty"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "viem": "^2.29.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "typescript": "^5.8.3"
+  }
+}

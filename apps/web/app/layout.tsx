@@ -4,6 +4,7 @@ import "@workspace/ui/globals.css";
 import { headers } from "next/headers";
 import { Toaster } from "@workspace/ui/components/sonner";
 import { Providers } from "@/providers/root-provider";
+import { SiteHeader } from "@/ui/site-header";
 
 const fontSans = Geist({
 	subsets: ["latin"],
@@ -27,6 +28,7 @@ export default async function RootLayout({
 			<body
 				className={`${fontSans.variable} ${fontMono.variable} overscroll-none font-sans antialiased`}>
 				<Providers cookies={cookies}>
+					<SiteHeader />
 					{children}
 					<Toaster />
 				</Providers>
