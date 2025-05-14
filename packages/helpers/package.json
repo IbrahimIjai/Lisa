@@ -2,9 +2,7 @@
   "name": "@zeroprotocol/helpers",
   "version": "1.0.0",
   "description": "",
-  "scripts": {
-    "build": "tsc --pretty"
-  },
+
   "keywords": [],
   "author": "",
   "license": "ISC",
