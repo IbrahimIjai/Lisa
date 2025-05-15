@@ -9,6 +9,8 @@ import {
   walletActionProvider,
   WalletProvider,
   wethActionProvider,
+  morphoActionProvider,
+  moonwellActionProvider,
 } from "@coinbase/agentkit";
 import fs from "fs";
 import { createWalletClient, Hex, http } from "viem";
@@ -93,6 +95,8 @@ export async function prepareAgentkitAndWalletProvider(): Promise<{
       pythActionProvider(),
       walletActionProvider(),
       erc20ActionProvider(),
+      morphoActionProvider(),
+      moonwellActionProvider(),
     ];
     const canUseCdpApi = process.env.CDP_API_KEY_NAME && process.env.CDP_API_KEY_PRIVATE_KEY;
     if (canUseCdpApi) {

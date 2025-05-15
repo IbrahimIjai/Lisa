@@ -18,6 +18,7 @@
     "@langchain/langgraph": "^0.2.21",
     "@solana/web3.js": "^1.98.0",
     "@tanstack/react-query": "^5",
+    "@upstash/redis": "^1.34.9",
     "ai": "^4.1.54",
     "axios": "^1.9.0",
     "bs58": "^6.0.0",

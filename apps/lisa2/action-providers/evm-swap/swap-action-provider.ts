@@ -1,8 +1,8 @@
 import { z } from "zod";
 import { ActionProvider, WalletProvider, Network } from "@coinbase/agentkit";
 import axios from "axios";
-import { SwapQuoteSchema } from "./schemas";
-
+import { ExecuteSwapSchema, SwapQuoteSchema } from "./schemas";
+import { TokenAllowanceSchema } from "./schemas";
 
 // Define the base URL for 0x API
 const ZERO_EX_API_URL = "https://api.0x.org";
@@ -42,7 +42,7 @@ class ZeroExSwapActionProvider extends ActionProvider<WalletProvider> {
 				CHAIN_ID_TO_ZERO_EX_API,
 				chainId,
 			)
-				? CHAIN_ID_TO_ZERO_EX_API[chainId]
+				? CHAIN_ID_TO_ZERO_EX_API[chainId as number]
 				: ZERO_EX_API_URL;
 
 			// Make request to the 0x price API
@@ -60,7 +60,6 @@ class ZeroExSwapActionProvider extends ActionProvider<WalletProvider> {
 
 			const quote = response.data;
 
-			// Return a formatted quote result
 			return JSON.stringify(
 				{
 					sellToken: quote.sellTokenAddress,
@@ -103,7 +102,7 @@ class ZeroExSwapActionProvider extends ActionProvider<WalletProvider> {
 
 			let chainId = args.chainId;
 			if (!chainId && network?.chainId) {
-				chainId = network.chainId;
+				chainId = Number(network.chainId);
 			} else if (!chainId) {
 				chainId = DEFAULT_CHAIN_ID;
 			}
@@ -113,7 +112,7 @@ class ZeroExSwapActionProvider extends ActionProvider<WalletProvider> {
 				CHAIN_ID_TO_ZERO_EX_API,
 				chainId,
 			)
-				? CHAIN_ID_TO_ZERO_EX_API[chainId]
+				? CHAIN_ID_TO_ZERO_EX_API[chainId as number]
 				: ZERO_EX_API_URL;
 
 			// First fetch price to check for allowance issues
@@ -127,7 +126,7 @@ class ZeroExSwapActionProvider extends ActionProvider<WalletProvider> {
 					chainId: chainId,
 				},
 				headers: {
-					"0x-api-key": process.env.ZEROX_API_KEY || "", // Optional API key
+					"0x-api-key": process.env.ZEROX_API_KEY || "",
 					"0x-version": "v2",
 				},
 			});
@@ -266,7 +265,7 @@ class ZeroExSwapActionProvider extends ActionProvider<WalletProvider> {
 
 			let chainId = args.chainId;
 			if (!chainId && network?.chainId) {
-				chainId = network.chainId;
+				chainId = Number(network.chainId);
 			} else if (!chainId) {
 				chainId = DEFAULT_CHAIN_ID;
 			}
@@ -276,7 +275,7 @@ class ZeroExSwapActionProvider extends ActionProvider<WalletProvider> {
 				CHAIN_ID_TO_ZERO_EX_API,
 				chainId,
 			)
-				? CHAIN_ID_TO_ZERO_EX_API[chainId]
+				? CHAIN_ID_TO_ZERO_EX_API[chainId as number]
 				: ZERO_EX_API_URL;
 
 			// Get the 0x Exchange Proxy address or use provided spender
@@ -389,26 +388,29 @@ class ZeroExSwapActionProvider extends ActionProvider<WalletProvider> {
 	}
 
 	// Register the available actions
-	getActions() {
+	getActions(walletProvider: WalletProvider) {
 		return [
 			{
 				name: "get_price_quote",
 				description: "Get a price quote for swapping tokens using 0x Protocol",
 				schema: SwapQuoteSchema,
-				handler: this.getPriceQuote.bind(this),
+				invoke: (args: z.infer<typeof SwapQuoteSchema>) =>
+					this.getPriceQuote(walletProvider, args),
 			},
 			{
 				name: "execute_swap",
 				description: "Execute a token swap using 0x Protocol with Permit2",
 				schema: ExecuteSwapSchema,
-				handler: this.executeSwap.bind(this),
+				invoke: (args: z.infer<typeof ExecuteSwapSchema>) =>
+					this.executeSwap(walletProvider, args),
 			},
 			{
 				name: "check_token_allowance",
 				description:
 					"Check if token approval is needed and get approval transaction data",
 				schema: TokenAllowanceSchema,
-				handler: this.checkTokenAllowance.bind(this),
+				invoke: (args: z.infer<typeof TokenAllowanceSchema>) =>
+					this.checkTokenAllowance(walletProvider, args),
 			},
 		];
 	}
