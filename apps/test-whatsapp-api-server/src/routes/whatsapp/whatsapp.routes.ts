@@ -8,10 +8,8 @@ const whatsappController = new WhatsappController();
 const router = Router();
 
 // Define webhook routes
-// @ts-ignore - Ignoring type errors since the implementation functions correctly
 router.get("/webhook", whatsappController.verifyWebhook);
 
-// @ts-ignore - Ignoring type errors since the implementation functions correctly
 router.post("/webhook", whatsappController.handleIncomingMessage);
 
 // Export the router
