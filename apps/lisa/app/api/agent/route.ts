@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 import { createAgent } from "./create-agent";
 
 // Explicitly set the runtime to nodejs
-export const runtime = "nodejs";
 
 /**
  * Handles incoming POST requests to interact with the AgentKit-powered AI agent.
@@ -48,7 +47,7 @@ export async function POST(
 
 		// 5️. Return the final response with CORS headers
 		return NextResponse.json(
-			{ response: agentResponse },
+			{ response: agentResponse || "No response from agent" },
 			{
 				headers: {
 					"Access-Control-Allow-Origin": "*",
