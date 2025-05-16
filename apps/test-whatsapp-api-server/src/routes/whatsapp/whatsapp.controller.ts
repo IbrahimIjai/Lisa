@@ -58,10 +58,14 @@ export class WhatsappController {
 			switch (message.type) {
 				case "text":
 					const text = message.text.body;
-					// For now, just echo the message back
+
+					// Process text through the agent API
+					const agentResponse = await whatsappService.callAgentAPI(text);
+
+					// Send the agent's response back to the user
 					await whatsappService.sendMessage(
 						messageSender,
-						`Echo: ${text}`,
+						agentResponse,
 						messageID,
 					);
 					break;

@@ -4,14 +4,20 @@ export class WhatsappService {
 	private readonly apiUrl: string;
 	private readonly phoneNumberId: string;
 	private readonly accessToken: string;
+	private readonly agentApiUrl: string;
 
 	constructor() {
 		this.apiUrl = "https://graph.facebook.com/v18.0";
 		this.phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID || "";
 		this.accessToken = process.env.WHATSAPP_ACCESS_TOKEN || "";
+		this.agentApiUrl = process.env.AGENT_API_URL || "";
 
 		if (!this.phoneNumberId || !this.accessToken) {
 			console.warn("WhatsApp API credentials not properly configured");
+		}
+
+		if (!this.agentApiUrl) {
+			console.warn("Agent API URL not configured");
 		}
 	}
 
@@ -183,6 +189,40 @@ export class WhatsappService {
 		} catch (error) {
 			console.error("Error sending image:", error);
 			return false;
+		}
+	}
+
+	/**
+	 * Calls the agent API with a user message and returns the agent's response
+	 * @param userMessage - The message from the WhatsApp user
+	 * @returns - The agent's response
+	 */
+	async callAgentAPI(userMessage: string): Promise<string> {
+		try {
+			if (!this.agentApiUrl) {
+				throw new Error(
+					"Agent API URL not configured in environment variables",
+				);
+			}
+
+			const response = await axios.post(
+				this.agentApiUrl,
+				{ userMessage },
+				{
+					headers: {
+						"Content-Type": "application/json",
+					},
+				},
+			);
+
+			// Extract the agent's response from the API response
+			const agentResponse =
+				response.data?.response || "Sorry, I couldn't process that request.";
+			return agentResponse;
+		} catch (error) {
+			console.error("Error calling agent API:", error);
+			// Return a fallback message if the agent API call fails
+			return "Sorry, I'm having trouble connecting to my brain right now. Please try again later.";
 		}
 	}
 }
