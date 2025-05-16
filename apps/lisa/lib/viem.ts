@@ -5,12 +5,15 @@ import { privateKeyToAccount } from "viem/accounts";
 import { base } from "viem/chains";
 import { Address, createWalletClient, http } from "viem";
 
-const account = privateKeyToAccount(process.env.PRIVATE_KEY! as Address);
+const account = privateKeyToAccount(
+	process.env.WALLET_PRIVATE_KEYS! as Address,
+);
 const client = createWalletClient({
 	account,
 	chain: base,
 	transport: http(),
 });
+
 const walletProvider = new ViemWalletProvider(client);
 
 export { walletProvider };

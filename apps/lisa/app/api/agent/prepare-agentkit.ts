@@ -1,3 +1,4 @@
+import { evmWalletManagementProvider } from "@/lib/action-providers/evm-wallet";
 import { walletProvider } from "@/lib/viem";
 import {
 	AgentKit,
@@ -5,6 +6,8 @@ import {
 	cdpWalletActionProvider,
 	CdpWalletProvider,
 	erc20ActionProvider,
+	morphoActionProvider,
+	moonwellActionProvider,
 	pythActionProvider,
 	walletActionProvider,
 	WalletProvider,
@@ -41,9 +44,6 @@ import * as fs from "fs";
  * - https://discord.gg/CDP
  */
 
-// Configure a file to persist the agent's CDP MPC Wallet Data
-const WALLET_DATA_FILE = "wallet_data.txt";
-
 /**
  * Prepares the AgentKit and WalletProvider.
  *
@@ -59,17 +59,8 @@ export async function prepareAgentkitAndWalletProvider(): Promise<{
 	walletProvider: WalletProvider;
 }> {
 	try {
-		let walletDataStr: string | null = null;
+	
 
-		// Read existing wallet data if available
-		if (fs.existsSync(WALLET_DATA_FILE)) {
-			try {
-				walletDataStr = fs.readFileSync(WALLET_DATA_FILE, "utf8");
-			} catch (error) {
-				console.error("Error reading wallet data:", error);
-				// Continue without wallet data
-			}
-		}
 
 		// Initialize AgentKit: https://docs.cdp.coinbase.com/agentkit/docs/agent-actions
 		const agentkit = await AgentKit.from({
@@ -79,6 +70,9 @@ export async function prepareAgentkitAndWalletProvider(): Promise<{
 				pythActionProvider(),
 				walletActionProvider(),
 				erc20ActionProvider(),
+				morphoActionProvider(),
+				moonwellActionProvider(),
+				evmWalletManagementProvider(),
 				cdpApiActionProvider({
 					apiKeyName: process.env.CDP_API_KEY_NAME,
 					apiKeyPrivateKey: process.env.CDP_API_KEY_PRIVATE_KEY,
