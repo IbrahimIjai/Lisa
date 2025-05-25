@@ -1,3 +1,4 @@
+import React from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import "@workspace/ui/globals.css";
@@ -20,7 +21,7 @@ export default async function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
-}>) {
+}>): Promise<React.JSX.Element> {
 	const headersObj = await headers();
 	const cookies = headersObj.get("cookie");
 	return (

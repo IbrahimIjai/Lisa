@@ -43,6 +43,11 @@ export async function createAgent(): Promise<
 	}
 
 	try {
+		// Check for required environment variables
+		if (!process.env.ANTHROPIC_API_KEY) {
+			throw new Error("ANTHROPIC_API_KEY is required but not provided in environment variables");
+		}
+
 		const { agentkit, walletProvider } =
 			await prepareAgentkitAndWalletProvider();
 
@@ -59,7 +64,7 @@ export async function createAgent(): Promise<
 
 		// Initialize Agent
 		const canUseFaucet =
-			walletProvider.getNetwork().networkId == "base-sepolia";
+			walletProvider.getNetwork().networkId === "base-sepolia";
 		const faucetMessage = `If you ever need funds, you can request them from the faucet.`;
 		const cantUseFaucetMessage = `If you need funds, you can provide your wallet details and request funds from the user.`;
 		agent = createReactAgent({
@@ -81,6 +86,6 @@ export async function createAgent(): Promise<
 		return agent;
 	} catch (error) {
 		console.error("Error initializing agent:", error);
-		throw new Error("Failed to initialize agent");
+		throw new Error(`Failed to initialize agent: ${(error as Error).message}`);
 	}
 }
