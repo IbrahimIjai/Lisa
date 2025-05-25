@@ -7,15 +7,6 @@ import { Toaster } from "@workspace/ui/components/sonner";
 import { Providers } from "@/providers/root-provider";
 import { SiteHeader } from "@/ui/site-header";
 
-const fontSans = Geist({
-	subsets: ["latin"],
-	variable: "--font-sans",
-});
-
-const fontMono = Geist_Mono({
-	subsets: ["latin"],
-	variable: "--font-mono",
-});
 
 export default async function RootLayout({
 	children,
@@ -25,15 +16,14 @@ export default async function RootLayout({
 	const headersObj = await headers();
 	const cookies = headersObj.get("cookie");
 	return (
-		<html lang="en" suppressHydrationWarning>
-			<body
-				className={`${fontSans.variable} ${fontMono.variable} overscroll-none font-sans antialiased`}>
-				<Providers cookies={cookies}>
-					<SiteHeader />
-					{children}
-					<Toaster />
-				</Providers>
-			</body>
-		</html>
-	);
+    <html lang="en" suppressHydrationWarning>
+      <body className={`font-Aeonik  overscroll-none font-sans antialiased`}>
+        <Providers cookies={cookies}>
+          <SiteHeader />
+          {children}
+          <Toaster />
+        </Providers>
+      </body>
+    </html>
+  );
 }
