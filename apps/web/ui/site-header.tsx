@@ -20,34 +20,34 @@ export function SiteHeader() {
 
 				<nav className="flex items-center gap-4 text-sm xl:gap-6">
 					<Link
-						href="/zero-pay"
+						href="/chat"
 						className={cn(
 							"transition-colors hover:text-foreground/80",
-							pathname === "/zero-pay"
+							pathname === "/chat" || pathname?.startsWith("/chat")
 								? "text-foreground"
 								: "text-foreground/80",
 						)}>
-						ZeroPay
+						Chat
 					</Link>
 					<Link
-						href="/zero-yield"
+						href="/dashboard"
 						className={cn(
 							"transition-colors hover:text-foreground/80",
-							pathname?.startsWith("/zero-yield")
+							pathname?.startsWith("/dashboard")
 								? "text-foreground"
 								: "text-foreground/80",
 						)}>
-						ZeroYield
+						Dashboard
 					</Link>
 					<Link
-						href="/docs"
+						href="/earn"
 						className={cn(
 							"transition-colors hover:text-foreground/80",
-							pathname?.startsWith("/docs")
+							pathname?.startsWith("/earn")
 								? "text-foreground"
 								: "text-foreground/80",
 						)}>
-						Docs
+						Earn
 					</Link>
 				</nav>
 
