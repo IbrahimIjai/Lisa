@@ -1,44 +1,52 @@
-# Lisa: WhatsApp DeFi Gateway
+# ZeroPay: Conversational DeFi Gateway
 
-Lisa is a WhatsApp-based bot that brings decentralized finance (DeFi) to billions of users via a familiar messaging interface. Our platform enables anyone with a WhatsApp account to participate in blockchain activities without requiring specialized apps or technical knowledge.
+ZeroPay is a conversational AI platform that brings decentralized finance (DeFi) to users through a natural chat interface. Our platform enables anyone to participate in blockchain activities without requiring specialized apps or technical knowledge - just chat with Lisa, our AI assistant.
 
 ## 🚀 Features
 
-- **Token Swaps**: Swap tokens via 1inch or other DEX aggregators directly from WhatsApp
+- **Token Swaps**: Swap tokens via 1inch or other DEX aggregators through simple chat commands
 - **Wallet Management**: Securely create, import, and manage crypto wallets
 - **DeFi Interactions**: Supply assets to lending protocols like Morpho, Aave, or Compound
-- **Payments**: Send and receive crypto payments using just a phone number
+- **Payments**: Send and receive crypto payments easily through conversational interface
 - **Yield Opportunities**: Access yield farming and staking protocols
 - **Real-time Notifications**: Get alerts for transactions and market movements
 - **Multi-chain Support**: Interact with Ethereum, Polygon, and other EVM-compatible chains
 
-## 💡 Why WhatsApp?
+## 💡 Why Conversational DeFi?
 
-- **Massive Reach**: Over 2 billion users worldwide
-- **No New App Required**: Users leverage a familiar interface they already use daily
+- **Natural Interaction**: Engage with DeFi through natural language rather than complex interfaces
 - **Low Barrier to Entry**: Perfect for crypto newcomers and the underbanked
-- **End-to-End Encryption**: Built on WhatsApp's secure messaging infrastructure
+- **Guided Experience**: AI assistant helps users navigate DeFi options safely
+- **Future Messaging Integration**: Plans to connect with WhatsApp, X (Twitter), and Telegram for even broader accessibility
 
 ## 🏗️ Architecture
 
 The project consists of:
 
-- **WhatsApp API Integration**: For message handling and user interactions
+- **Conversational AI**: Advanced natural language processing for understanding user intent
+- **Web Interface**: Clean, modern chat interface for interacting with Lisa
 - **Crypto Backend**: Secure wallet infrastructure and blockchain interactions
 - **DeFi Adapters**: Specialized modules to interact with various DeFi protocols
+- **Messaging Connectors**: Future integrations with WhatsApp, X, and Telegram
 
 ## 🔧 Development
 
-Check out the server implementation in the [apps/test-whatsapp-api-server](apps/test-whatsapp-api-server) directory.
+The project is structured as a monorepo with the following components:
+
+- **Web App**: Next.js frontend with chat interface in the [apps/web](apps/web) directory
+- **UI Components**: Shared UI library in the [packages/ui](packages/ui) directory
+- **Backend Services**: API and blockchain services
 
 ## 🛣️ Roadmap
 
-- ✅ WhatsApp API integration with webhook verification
+- ✅ Web chat interface development
+- ✅ Conversational AI integration
 - ⬜ Wallet creation and management
 - ⬜ Token swapping via DEX aggregators
 - ⬜ Lending protocol integration
 - ⬜ Fiat on/off ramps
 - ⬜ Multi-chain support
+- ⬜ WhatsApp, X, and Telegram integration
 - ⬜ User notification system
 
 ## 🤝 Contributing
@@ -51,7 +59,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-Built with ❤️ for DeFi accessibility
+Built with ❤️ for making DeFi accessible through conversation
 
 ```bash
 pnpm dlx shadcn@latest init
