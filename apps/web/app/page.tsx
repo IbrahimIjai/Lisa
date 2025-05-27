@@ -14,10 +14,45 @@ export default function Page() {
     <div className="flex items-center justify-center min-h-svh">
       <section>
         <div>
-          <Badge className="mb-6 bg-gradient-to-r from-blue-600/20 to-purple-600/20 border-blue-500/30 text-blue-300">
+          <Badge className="mb-6 bg-gradient-to-r from-primary/20 to-primary/20 border-primary/30 text-primary">
             <Sparkles className="w-4 h-4 mr-2" />
             Powered by Coinbase Agent Kit
           </Badge>
+
+          <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+            DeFi Without
+            <br />
+            <span className="bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent">
+              Complexity
+            </span>
+          </h1>
+
+          <p className="text-sm md:text-base text-gray-300 mb-4 max-w-4xl mx-auto leading-relaxed">
+            Execute sophisticated DeFi strategies using plain English. No
+            interfaces to learn, no protocols to master—just tell us what you
+            want to achieve.
+          </p>
+          <p className="text-xs text-gray-400 mb-8 max-w-3xl mx-auto">
+            "Swap my ETH for USDC" • "Lend on Aave" • "Farm yield on Moonwell" •
+            "Convert NGN to crypto"
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <Button
+              size="lg"
+              className="bg-gradient-to-r from-primary to-primary hover:from-primary/80 hover:to-primary/80 text-lg px-8 py-4"
+            >
+              Start Trading
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-gray-600 text-gray-300 hover:bg-gray-800 text-lg px-8 py-4"
+            >
+              View Demo
+            </Button>
+          </div>
         </div>
       </section>
     </div>
