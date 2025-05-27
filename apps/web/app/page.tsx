@@ -8,10 +8,14 @@ import {
   Globe,
   Sparkles,
 } from "lucide-react";
+import { ChatDemo } from "@/ui/landing/chat-demo";
+import { sampleChats } from "@/ui/static-data";
+
+
 
 export default function Page() {
   return (
-    <div className="flex items-center justify-center min-h-svh">
+    <div className="flex flex-col items-center justify-center min-h-svh">
       <section>
         <div>
           <Badge className="mb-6 bg-gradient-to-r from-primary/20 to-primary/20 border-primary/30 text-primary">
@@ -54,6 +58,14 @@ export default function Page() {
             </Button>
           </div>
         </div>
+      </section>
+
+      <section>
+        <ChatDemo
+          chats={sampleChats}
+          assistantName="Lisa"
+          placeholder="Try: 'Convert my USDC to ETH' or 'Show my portfolio balance'"
+        />
       </section>
     </div>
   );
