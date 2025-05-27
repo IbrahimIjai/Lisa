@@ -60,12 +60,18 @@ export default function Page() {
         </div>
       </section>
 
-      <section>
+      <section className="mt-24 container-wrapper">
         <ChatDemo
           chats={sampleChats}
           assistantName="Lisa"
           placeholder="Try: 'Convert my USDC to ETH' or 'Show my portfolio balance'"
         />
+      </section>
+
+      <section className="mt-24 container-wrapper h-[300vh]">
+        <div className="h-full w-full bg-gray-900/50 backdrop-blur-sm border rounded-2xl p-6">
+          
+        </div>
       </section>
     </div>
   );
