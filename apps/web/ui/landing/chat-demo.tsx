@@ -50,11 +50,11 @@ export function ChatDemo({
   const containerScrollProgress = useMotionValue(0);
   const chatScrollPosition = useSpring(0, { stiffness: 300, damping: 30 });
 
-  // Calculate container height based on chat length
-  const containerHeight = Math.max(chats.length * 100 + 800, 1500); // Minimum 1500px, or based on chat length
+  // Calculate container height based on chat length with more space
+  const containerHeight = Math.max(chats.length * 150 + 1200, 3500); // Increased minimum height to 2000px
 
-  // Pin trigger position (when chat component should stick)
-  const PIN_TRIGGER = 160;
+  // Pin trigger positions (when chat component should stick/unstick)
+  const TOP_PIN_TRIGGER = 160; // Distance from top of viewport to pin
 
   // Track scroll progress through the container
   const { scrollYProgress } = useScroll({
@@ -62,8 +62,8 @@ export function ChatDemo({
     offset: ["start end", "end start"],
   });
 
-  // Transform scroll progress to chat scroll position
-  const chatProgress = useTransform(scrollYProgress, [0.2, 0.8], [0, 1]);
+  // Transform scroll progress to chat scroll position - adjusted range for better scrolling
+  const chatProgress = useTransform(scrollYProgress, [0.15, 0.7], [0, 1]);
 
   // Update chat scroll limits when component mounts or chats change
   useEffect(() => {
@@ -78,9 +78,15 @@ export function ChatDemo({
   // Handle scroll progress changes
   useMotionValueEvent(chatProgress, "change", (latest) => {
     if (isPinned && chatMessagesRef.current && maxChatScroll > 0) {
-      const targetScroll = latest * maxChatScroll;
+      // Ensure we can scroll all the way to the end by adding a small buffer
+      const targetScroll = latest * (maxChatScroll + 20);
       chatMessagesRef.current.scrollTop = targetScroll;
       chatScrollPosition.set(latest);
+      
+      // When reaching the end (latest > 0.95), force scroll to the very bottom
+      if (latest > 0.95) {
+        chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight;
+      }
     }
   });
 
@@ -92,22 +98,44 @@ export function ChatDemo({
 
     const containerRect = containerRef.current.getBoundingClientRect();
     const componentRect = chatComponentRef.current.getBoundingClientRect();
-
-    // Calculate how much of the container is left to scroll through
-    const containerBottom = containerRect.bottom - window.innerHeight;
     
-    // Pin when container is in view and component reaches trigger point
-    // Only unpin when we've scrolled past 95% of the container
-    const shouldPin =
-      containerRect.top <= PIN_TRIGGER &&
-      (containerBottom > 0 || containerRect.bottom > PIN_TRIGGER + componentRect.height);
-
+    // Calculate how close we are to the end of the container
+    const distanceToBottom = window.innerHeight - containerRect.bottom;
+    
+    // Calculate how far the container bottom is from the top of the viewport
+    // (smaller values mean the container is closer to leaving the viewport at the top)
+    const containerBottomPosition = containerRect.bottom;
+    
+    // Calculate how much of the container is visible in the viewport
+    const containerVisibleHeight = Math.min(containerRect.bottom, window.innerHeight) - 
+                                  Math.max(containerRect.top, 0);
+    
+    // Calculate what percentage of the viewport height is filled by the container
+    const containerViewportPercentage = containerVisibleHeight / window.innerHeight;
+    
+    // UNPINNING CONDITIONS:
+    // 1. Container is leaving the viewport (bottom < 70% of viewport height)
+    // 2. Container is taking up less than 40% of the viewport
+    const shouldUnpin = 
+      containerBottomPosition < window.innerHeight * 0.7 || 
+      containerViewportPercentage < 0.4;
+    
+    // PINNING CONDITIONS:
+    // 1. Container top has scrolled up to or past the trigger point
+    // 2. Container is still mostly visible on screen
+    // 3. We shouldn't unpin yet based on conditions above
+    const shouldPin = 
+      containerRect.top <= TOP_PIN_TRIGGER && 
+      containerRect.bottom > 0 &&
+      !shouldUnpin;
+    
+    // Update pinned state
     if (shouldPin && !isPinned) {
       setIsPinned(true);
-    } else if (!shouldPin && isPinned) {
+    } else if ((!shouldPin || shouldUnpin) && isPinned) {
       setIsPinned(false);
     }
-
+    
     // Update container scroll progress for visual feedback
     if (containerRect.height > 0) {
       const progress = Math.max(
@@ -122,29 +150,10 @@ export function ChatDemo({
     }
   });
 
-  // Visual transforms based on scroll state
-  const borderGlow = useTransform(
-    containerScrollProgress,
-    [0, 0.2, 0.8, 1],
-    [
-      "rgba(75, 85, 99, 1)",
-      "rgba(59, 130, 246, 0.6)",
-      "rgba(59, 130, 246, 0.6)",
-      "rgba(75, 85, 99, 1)",
-    ]
-  );
-
-  const componentScale = useTransform(
-    containerScrollProgress,
-    [0, 0.1, 0.9, 1],
-    [0.9, 1, 1, 0.9]
-  );
-
-  const componentOpacity = useTransform(
-    containerScrollProgress,
-    [0, 0.1, 0.9, 1],
-    [0.5, 1, 1, 0.5]
-  );
+  // Visual transforms based on scroll state - removed animations
+  const borderGlow = "rgba(75, 85, 99, 1)";
+  const componentScale = 1;
+  const componentOpacity = 1;
 
   const chatScrollPositionWidth = useTransform(
     chatScrollPosition,
@@ -163,24 +172,21 @@ export function ChatDemo({
         {/* Chat component that gets pinned */}
         <motion.div
           ref={chatComponentRef}
-          className={`w-full transition-all duration-300 ${
+          className={`w-full mx-auto ${
             isPinned
               ? "fixed top-20 left-1/2 -translate-x-1/2 z-30 w-full lg:w-4/5 px-4"
-              : "absolute top-0"
+              : "absolute top-0 w-full"
           }`}
           style={{
-            scale: isPinned ? 1 : componentScale,
-            opacity: isPinned ? 1 : componentOpacity,
+            scale: 1,
+            opacity: 1,
           }}
-          layout
         >
           <motion.div
             className="bg-gray-900/50 backdrop-blur-sm border rounded-2xl p-6"
             style={{
               borderColor: borderGlow,
-              boxShadow: isPinned
-                ? "0 25px 50px -12px rgba(59, 130, 246, 0.25)"
-                : "0 10px 25px -5px rgba(0, 0, 0, 0.1)",
+              boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)",
             }}
           >
             {/* Chat Header */}
@@ -218,58 +224,58 @@ export function ChatDemo({
               {/* Status Indicators */}
               <AnimatePresence>
                 {/* {isPinned && ( */}
-                  <motion.div
-                    className="flex items-center gap-3 flex-shrink-0"
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 20 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {/* Progress Indicator */}
-                    <div className="text-xs text-center">
-                      <div className="text-gray-400 mb-1 whitespace-nowrap">
-                        Chat Progress
-                      </div>
-                      <div className="w-24 h-2 bg-gray-700 rounded-full overflow-hidden">
-                        <motion.div
-                          className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
-                          style={{
-                            width: chatScrollPositionWidth,
-                          }}
-                        />
-                      </div>
-                      <motion.div className="text-gray-500 text-xs mt-1">
-                        {Math.round(chatScrollPosition.get() * 100)}%
-                      </motion.div>
+                <motion.div
+                  className="flex items-center gap-3 flex-shrink-0"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {/* Progress Indicator */}
+                  <div className="text-xs text-center">
+                    <div className="text-gray-400 mb-1 whitespace-nowrap">
+                      Chat Progress
                     </div>
-
-                    {/* Pinned Badge */}
-                    <motion.div
-                      className="flex items-center gap-2 text-xs bg-blue-600/20 border border-blue-500/30 rounded-full px-3 py-1 whitespace-nowrap"
-                      animate={{
-                        scale: [1, 1.05, 1],
-                        boxShadow: [
-                          "0 0 0 rgba(59, 130, 246, 0)",
-                          "0 0 10px rgba(59, 130, 246, 0.3)",
-                          "0 0 0 rgba(59, 130, 246, 0)",
-                        ],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Number.POSITIVE_INFINITY,
-                      }}
-                    >
+                    <div className="w-24 h-2 bg-gray-700 rounded-full overflow-hidden">
                       <motion.div
-                        className="w-2 h-2 bg-blue-500 rounded-full"
-                        animate={{ opacity: [1, 0.3, 1] }}
-                        transition={{
-                          duration: 1,
-                          repeat: Number.POSITIVE_INFINITY,
+                        className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
+                        style={{
+                          width: chatScrollPositionWidth,
                         }}
                       />
-                      <span className="text-blue-300">Reading Mode</span>
+                    </div>
+                    <motion.div className="text-gray-500 text-xs mt-1">
+                      {Math.round(chatScrollPosition.get() * 100)}%
                     </motion.div>
+                  </div>
+
+                  {/* Pinned Badge */}
+                  <motion.div
+                    className="flex items-center gap-2 text-xs bg-blue-600/20 border border-blue-500/30 rounded-full px-3 py-1 whitespace-nowrap"
+                    animate={{
+                      scale: [1, 1.05, 1],
+                      boxShadow: [
+                        "0 0 0 rgba(59, 130, 246, 0)",
+                        "0 0 10px rgba(59, 130, 246, 0.3)",
+                        "0 0 0 rgba(59, 130, 246, 0)",
+                      ],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Number.POSITIVE_INFINITY,
+                    }}
+                  >
+                    <motion.div
+                      className="w-2 h-2 bg-blue-500 rounded-full"
+                      animate={{ opacity: [1, 0.3, 1] }}
+                      transition={{
+                        duration: 1,
+                        repeat: Number.POSITIVE_INFINITY,
+                      }}
+                    />
+                    <span className="text-blue-300">Reading Mode</span>
                   </motion.div>
+                </motion.div>
                 {/* // )} */}
               </AnimatePresence>
             </motion.div>
