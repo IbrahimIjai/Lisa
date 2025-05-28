@@ -91,8 +91,8 @@ importers:
         version: 3.24.4
     devDependencies:
       '@types/node':
-        specifier: ^20
-        version: 20.17.47
+        specifier: ^22.0.0
+        version: 22.15.18
       '@types/react':
         specifier: ^18
         version: 18.3.21
@@ -110,7 +110,7 @@ importers:
         version: 8.5.3
       tailwindcss:
         specifier: ^3.4.1
-        version: 3.4.17(ts-node@10.9.2(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@20.17.47)(typescript@5.8.3))
+        version: 3.4.17(ts-node@10.9.2(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@22.15.18)(typescript@5.8.3))
       typescript:
         specifier: ^5
         version: 5.8.3
@@ -279,8 +279,8 @@ importers:
         version: 2.15.3(@tanstack/query-core@5.76.0)(@tanstack/react-query@5.76.1(react@19.1.0))(@types/react@19.1.4)(@upstash/redis@1.34.9)(bufferutil@4.0.9)(react@19.1.0)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.29.4(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.24.4))(zod@3.24.4)
     devDependencies:
       '@types/node':
-        specifier: ^20
-        version: 20.17.47
+        specifier: ^22.0.0
+        version: 22.15.18
       '@types/react':
         specifier: ^19
         version: 19.1.4
@@ -343,8 +343,8 @@ importers:
         version: 2.29.4(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.24.4)
     devDependencies:
       '@types/node':
-        specifier: ^20
-        version: 20.17.47
+        specifier: ^22.0.0
+        version: 22.15.18
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
@@ -392,10 +392,10 @@ importers:
         version: 4.1.7
       '@turbo/gen':
         specifier: ^2.4.2
-        version: 2.5.3(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@20.17.47)(typescript@5.8.3)
+        version: 2.5.3(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@22.15.18)(typescript@5.8.3)
       '@types/node':
-        specifier: ^20
-        version: 20.17.47
+        specifier: ^22.0.0
+        version: 22.15.18
       '@types/react':
         specifier: ^19
         version: 19.1.4
@@ -1763,14 +1763,8 @@ packages:
   '@types/node@12.20.55':
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
 
-  '@types/node@18.19.100':
-    resolution: {integrity: sha512-ojmMP8SZBKprc3qGrGk8Ujpo80AXkrP7G2tOT4VWr5jlr5DHjsJF+emXJz+Wm0glmy4Js62oKMdZZ6B9Y+tEcA==}
-
   '@types/node@18.19.104':
     resolution: {integrity: sha512-mqjoYx1RjmN61vjnHWfiWzAlwvBKutoUdm+kYLPnjI5DCh8ZqofUhaTbT3WLl7bt3itR8DuCf8ShnxI0JvIC3g==}
-
-  '@types/node@20.17.47':
-    resolution: {integrity: sha512-3dLX0Upo1v7RvUimvxLeXqwrfyKxUINk0EAM83swP2mlSUcwV73sZy8XhNz8bcZ3VbsfQyC/y6jRdL5tgCNpDQ==}
 
   '@types/node@22.15.18':
     resolution: {integrity: sha512-v1DKRfUdyW+jJhZNEI1PYy29S2YRxMV5AOO/x/SjKmW0acCIOqmbj6Haf9eHAhsPmrhlHSxEhv/1WszcLWV4cg==}
@@ -6477,7 +6471,7 @@ snapshots:
 
   '@anthropic-ai/sdk@0.39.0':
     dependencies:
-      '@types/node': 18.19.100
+      '@types/node': 18.19.104
       '@types/node-fetch': 2.6.12
       abort-controller: 3.0.0
       agentkeepalive: 4.6.0
@@ -8498,7 +8492,7 @@ snapshots:
 
   '@tsconfig/node16@1.0.4': {}
 
-  '@turbo/gen@2.5.3(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@20.17.47)(typescript@5.8.3)':
+  '@turbo/gen@2.5.3(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@22.15.18)(typescript@5.8.3)':
     dependencies:
       '@turbo/workspaces': 2.5.3
       commander: 10.0.1
@@ -8508,7 +8502,7 @@ snapshots:
       node-plop: 0.26.3
       picocolors: 1.0.1
       proxy-agent: 6.5.0
-      ts-node: 10.9.2(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@20.17.47)(typescript@5.8.3)
+      ts-node: 10.9.2(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@22.15.18)(typescript@5.8.3)
       update-check: 1.5.4
       validate-npm-package-name: 5.0.1
     transitivePeerDependencies:
@@ -8540,13 +8534,13 @@ snapshots:
   '@types/body-parser@1.19.5':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 20.17.47
+      '@types/node': 22.15.18
 
   '@types/cacheable-request@6.0.3':
     dependencies:
       '@types/http-cache-semantics': 4.0.4
       '@types/keyv': 3.1.4
-      '@types/node': 20.17.47
+      '@types/node': 22.15.18
       '@types/responselike': 1.0.3
 
   '@types/compression@1.7.5':
@@ -8555,7 +8549,7 @@ snapshots:
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 20.17.47
+      '@types/node': 22.15.18
 
   '@types/cookie-parser@1.4.8(@types/express@5.0.1)':
     dependencies:
@@ -8563,7 +8557,7 @@ snapshots:
 
   '@types/cors@2.8.18':
     dependencies:
-      '@types/node': 20.17.47
+      '@types/node': 22.15.18
 
   '@types/debug@4.1.12':
     dependencies:
@@ -8579,7 +8573,7 @@ snapshots:
 
   '@types/express-serve-static-core@5.0.6':
     dependencies:
-      '@types/node': 20.17.47
+      '@types/node': 22.15.18
       '@types/qs': 6.9.18
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.4
@@ -8593,7 +8587,7 @@ snapshots:
   '@types/glob@7.2.0':
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 20.17.47
+      '@types/node': 22.15.18
 
   '@types/hast@3.0.4':
     dependencies:
@@ -8615,11 +8609,11 @@ snapshots:
   '@types/jsonwebtoken@9.0.9':
     dependencies:
       '@types/ms': 2.1.0
-      '@types/node': 20.17.47
+      '@types/node': 22.15.18
 
   '@types/keyv@3.1.4':
     dependencies:
-      '@types/node': 20.17.47
+      '@types/node': 22.15.18
 
   '@types/mdast@4.0.4':
     dependencies:
@@ -8631,28 +8625,20 @@ snapshots:
 
   '@types/morgan@1.9.9':
     dependencies:
-      '@types/node': 20.17.47
+      '@types/node': 22.15.18
 
   '@types/ms@2.1.0': {}
 
   '@types/node-fetch@2.6.12':
     dependencies:
-      '@types/node': 20.17.47
+      '@types/node': 22.15.18
       form-data: 4.0.2
 
   '@types/node@12.20.55': {}
 
-  '@types/node@18.19.100':
-    dependencies:
-      undici-types: 5.26.5
-
   '@types/node@18.19.104':
     dependencies:
       undici-types: 5.26.5
-
-  '@types/node@20.17.47':
-    dependencies:
-      undici-types: 6.19.8
 
   '@types/node@22.15.18':
     dependencies:
@@ -8687,19 +8673,19 @@ snapshots:
 
   '@types/responselike@1.0.3':
     dependencies:
-      '@types/node': 20.17.47
+      '@types/node': 22.15.18
 
   '@types/retry@0.12.0': {}
 
   '@types/send@0.17.4':
     dependencies:
       '@types/mime': 1.3.5
-      '@types/node': 20.17.47
+      '@types/node': 22.15.18
 
   '@types/serve-static@1.15.7':
     dependencies:
       '@types/http-errors': 2.0.4
-      '@types/node': 20.17.47
+      '@types/node': 22.15.18
       '@types/send': 0.17.4
 
   '@types/strip-bom@3.0.0': {}
@@ -8708,7 +8694,7 @@ snapshots:
 
   '@types/through@0.0.33':
     dependencies:
-      '@types/node': 20.17.47
+      '@types/node': 22.15.18
 
   '@types/tinycolor2@1.4.6': {}
 
@@ -8724,11 +8710,11 @@ snapshots:
 
   '@types/ws@7.4.7':
     dependencies:
-      '@types/node': 20.17.47
+      '@types/node': 22.15.18
 
   '@types/ws@8.18.1':
     dependencies:
-      '@types/node': 20.17.47
+      '@types/node': 22.15.18
 
   '@typescript-eslint/eslint-plugin@8.32.1(@typescript-eslint/parser@8.32.1(eslint@8.57.1)(typescript@5.8.3))(eslint@8.57.1)(typescript@5.8.3)':
     dependencies:
@@ -13220,13 +13206,13 @@ snapshots:
       camelcase-css: 2.0.1
       postcss: 8.5.3
 
-  postcss-load-config@4.0.2(postcss@8.5.3)(ts-node@10.9.2(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@20.17.47)(typescript@5.8.3)):
+  postcss-load-config@4.0.2(postcss@8.5.3)(ts-node@10.9.2(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@22.15.18)(typescript@5.8.3)):
     dependencies:
       lilconfig: 3.1.3
       yaml: 2.8.0
     optionalDependencies:
       postcss: 8.5.3
-      ts-node: 10.9.2(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@20.17.47)(typescript@5.8.3)
+      ts-node: 10.9.2(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@22.15.18)(typescript@5.8.3)
 
   postcss-nested@6.2.0(postcss@8.5.3):
     dependencies:
@@ -14070,7 +14056,7 @@ snapshots:
 
   tailwind-merge@3.3.0: {}
 
-  tailwindcss@3.4.17(ts-node@10.9.2(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@20.17.47)(typescript@5.8.3)):
+  tailwindcss@3.4.17(ts-node@10.9.2(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@22.15.18)(typescript@5.8.3)):
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
@@ -14089,7 +14075,7 @@ snapshots:
       postcss: 8.5.3
       postcss-import: 15.1.0(postcss@8.5.3)
       postcss-js: 4.0.1(postcss@8.5.3)
-      postcss-load-config: 4.0.2(postcss@8.5.3)(ts-node@10.9.2(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@20.17.47)(typescript@5.8.3))
+      postcss-load-config: 4.0.2(postcss@8.5.3)(ts-node@10.9.2(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@22.15.18)(typescript@5.8.3))
       postcss-nested: 6.2.0(postcss@8.5.3)
       postcss-selector-parser: 6.1.2
       resolve: 1.22.10
@@ -14203,26 +14189,6 @@ snapshots:
       - '@swc/core'
       - '@swc/wasm'
       - '@types/node'
-
-  ts-node@10.9.2(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@20.17.47)(typescript@5.8.3):
-    dependencies:
-      '@cspotcode/source-map-support': 0.8.1
-      '@tsconfig/node10': 1.0.11
-      '@tsconfig/node12': 1.0.11
-      '@tsconfig/node14': 1.0.3
-      '@tsconfig/node16': 1.0.4
-      '@types/node': 20.17.47
-      acorn: 8.14.1
-      acorn-walk: 8.3.4
-      arg: 4.1.3
-      create-require: 1.1.1
-      diff: 4.0.2
-      make-error: 1.3.6
-      typescript: 5.8.3
-      v8-compile-cache-lib: 3.0.1
-      yn: 3.1.1
-    optionalDependencies:
-      '@swc/core': 1.11.24(@swc/helpers@0.5.17)
 
   ts-node@10.9.2(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@22.15.18)(typescript@5.8.3):
     dependencies:
