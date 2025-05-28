@@ -308,8 +308,11 @@ export function ChatDemo({
                     className={`rounded-2xl px-4 py-3 max-w-sm transition-all duration-200 ${
                       chat.sender === "user"
                         ? "bg-blue-600 text-white rounded-br-md"
-                        : "bg-gray-800 text-gray-100 rounded-bl-md"
+                        : "bg-gray-800 text-gray-100 rounded-bl-md relative"
                     }`}
+                    style={{
+                      boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)",
+                    }}
                     whileHover={
                       !isPinned
                         ? {
@@ -324,6 +327,16 @@ export function ChatDemo({
                     }
                     transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   >
+                    {chat.sender === "assistant" && (
+                      <div className="absolute -top-2 -left-2 flex space-x-1">
+                        {[0, 1, 2].map((i) => (
+                          <div 
+                            key={i} 
+                            className="w-1.5 h-1.5 bg-blue-400 rounded-full"
+                          />
+                        ))}
+                      </div>
+                    )}
                     <p className="text-sm whitespace-pre-line leading-relaxed">
                       {chat.message}
                     </p>

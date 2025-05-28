@@ -5,6 +5,7 @@ import { Icons } from "./icon";
 import { usePathname } from "next/navigation";
 import { cn } from "@workspace/ui/lib/utils";
 import { WagmiHeaderButton } from "./wagmi-connect-button";
+import { ThemeSwitch } from "@workspace/ui/components/theme-switch";
 
 export function SiteHeader() {
 	const pathname = usePathname();
@@ -51,7 +52,10 @@ export function SiteHeader() {
 					</Link>
 				</nav>
 
-				<WagmiHeaderButton/>
+			<div className="flex items-center gap-2">
+				<WagmiHeaderButton />
+				<ThemeSwitch />
+			</div>
 			</div>
 		</header>
 	);
